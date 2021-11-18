@@ -3,17 +3,17 @@ import { createContext, useState } from "react"
 const UserContext = createContext({})
 
 const UserContextProvider = props => {
-  const [isLogged, setisLogged] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
 
   const value = {
     isLogged: isLogged,
-    setisLogged: setisLogged
+    setIsLogged: setIsLogged
   }
 
   return (
-    <UserContextProvider value={value}>
+    <UserContext.Provider value={value}>
       {props.children}
-    </UserContextProvider>
+    </UserContext.Provider>
   )
 }
 

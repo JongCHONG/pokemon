@@ -1,13 +1,9 @@
-// import { useContext } from "react"
+import { useContext } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { Input, Button } from "@chakra-ui/react"
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
-// import { UserContext } from "../contexts/User"
-
-// const User = () => {
-//   const { isLogged, setIsLogged } = useContext(UserContext)
-// }
+import { UserContext } from "../contexts/User"
 
 const Login = () => {
   const formik = useFormik({
@@ -17,8 +13,6 @@ const Login = () => {
     },
     onSubmit: values => {
       console.log(values)
-      // console.log(isLogged)
-      // setIsLogged()
     },
     validationSchema: Yup.object().shape({
       username: Yup.string()
@@ -30,6 +24,18 @@ const Login = () => {
     }),
     validateOnChange: false
   })
+
+  const { isLogged, setIsLogged } = useContext(UserContext)
+  
+  const handleButtonClick = () => {
+    if (isLogged === false) {
+      setIsLogged(true)
+    } else {
+      setIsLogged(false)
+    }
+  }
+  
+  console.log(isLogged);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -55,9 +61,15 @@ const Login = () => {
         <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
       </FormControl>
 
-      <Button type="submit" colorScheme="teal" variant="solid" w="100%" mt={5}>
-        Submit
-      </Button>
+      {isLogged === false ? 
+          <Button onClick={handleButtonClick} type="submit" colorScheme="teal" variant="solid" w="100%" mt={5}>
+            Submit
+          </Button>
+        :
+          <Button onClick={handleButtonClick} type="button" colorScheme="teal" variant="solid" w="100%" mt={5}>
+            Logout
+          </Button>
+      }
     </form>
   )
 }
