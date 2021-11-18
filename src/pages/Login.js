@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { useNavigate } from 'react-router-dom'
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { Input, Button } from "@chakra-ui/react"
@@ -6,6 +7,9 @@ import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-contro
 import { UserContext } from "../contexts/User"
 
 const Login = () => {
+  const { isLogged, setIsLogged } = useContext(UserContext)
+  let navigate = useNavigate()
+
   const formik = useFormik({
     initialValues: {
       username: "Benoit",
@@ -25,17 +29,16 @@ const Login = () => {
     validateOnChange: false
   })
 
-  const { isLogged, setIsLogged } = useContext(UserContext)
-  
-  const handleButtonClick = () => {
+  const handleButtonClick = (event) => {
     if (isLogged === false) {
       setIsLogged(true)
+      navigate('/')
     } else {
       setIsLogged(false)
     }
   }
   
-  console.log(isLogged);
+  // console.log(isLogged)
 
   return (
     <form onSubmit={formik.handleSubmit}>

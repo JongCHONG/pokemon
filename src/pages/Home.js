@@ -6,7 +6,7 @@ import { Box, Text, UnorderedList, ListItem, Button } from "@chakra-ui/react"
 
 const Home = () => {
   const [pokemon, setPokemon] = useState(null)
-  const { isLogged, setIsLogged } = useContext(UserContext)
+  const { isLogged } = useContext(UserContext)
 
   useEffect(() => { // => componentDidMount
     getPokemon(1)
