@@ -1,4 +1,4 @@
-import { useState, useEffect,useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { UserContext } from "../contexts/User"
 import { Link } from "react-router-dom"
 
@@ -39,7 +39,7 @@ const Home = () => {
 
   return (
     <>
-    {isLogged === false ? 
+    {isLogged === true ? 
     <Box>
        <Box border="1px" borderColor="teal" borderRadius={5} p={5}>
         <Box mb={5}>
